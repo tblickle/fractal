@@ -1,8 +1,9 @@
-package online.blickle.fractal.ifs;
+package online.blickle.fractal.ifs.affine;
 
 import online.blickle.fractal.data.FCoordinate;
+import online.blickle.fractal.ifs.IFSElementaryFunction;
 
-public class AffineTransformation implements IFSFunction{
+public class AffineTransformation implements IFSElementaryFunction{
 	
 	private double a11=0;
 	private double a12=0;
