@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import junit.framework.Assert;
+import online.blickle.fractal.data.CanvasMapper;
 import online.blickle.fractal.data.FCoordinate;
 import online.blickle.fractal.data.FPixel;
 

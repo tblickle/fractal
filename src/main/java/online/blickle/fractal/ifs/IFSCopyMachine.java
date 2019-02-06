@@ -7,7 +7,7 @@ import java.util.List;
 
 import online.blickle.fractal.data.FCoordinate;
 import online.blickle.fractal.data.FPixel;
-import online.blickle.fractal.view.CanvasMapper;
+import online.blickle.fractal.data.CanvasMapper;
 
 public class IFSCopyMachine  {
 	

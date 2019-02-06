@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 
 import online.blickle.fractal.data.FCoordinate;
 import online.blickle.fractal.data.FPixel;
-import online.blickle.fractal.view.CanvasMapper;
+import online.blickle.fractal.data.CanvasMapper;
 
 public class IFSChaosGame  {
 	
@@ -21,7 +21,7 @@ public class IFSChaosGame  {
 		
 	}
 	
-	public void performSteps(BufferedImage image,  int steps) {
+	public BufferedImage performSteps(BufferedImage image,  int steps) {
 		
 		CanvasMapper mapper = new CanvasMapper(image.getWidth(), image.getHeight(), calculator.getLowerLeft(),calculator.getUpperRight());
 		Graphics2D    graphics = image.createGraphics();
@@ -31,6 +31,7 @@ public class IFSChaosGame  {
     		graphics.setPaint ( colorMap[calculator.getLastFunctionIdx()]);
     		graphics.fillOval(lastPixel.getX(), lastPixel.getY(), 3, 3);
     	}
+		return image;
                
 	}
 	
