@@ -1,13 +1,8 @@
-package online.blickle.fractal.view;
+package online.blickle.fractal.data;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-
-import junit.framework.Assert;
-import online.blickle.fractal.data.CanvasMapper;
-import online.blickle.fractal.data.FCoordinate;
-import online.blickle.fractal.data.FPixel;
 
 public class CanvasMapper_Test {
 
