@@ -1,6 +1,7 @@
 package online.blickle.fractal.ui;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
@@ -10,16 +11,20 @@ import java.util.Observable;
 
 import javax.imageio.ImageIO;
 
+import online.blickle.fractal.data.FPixel;
 import online.blickle.fractal.ifs.IFSChaosGame;
 import online.blickle.fractal.ifs.IFSCopyMachine;
 
 public class FractalModel extends Observable{
 
-	private static int PREF_SIZE = 500;
+	private static int PREF_SIZE = 800;
 	private BufferedImage image;
+	private SierpinskiAnimatedModel smodel;
 	
 	public FractalModel() {
 		image = new BufferedImage(PREF_SIZE, PREF_SIZE, BufferedImage.TYPE_INT_RGB );
+		smodel = new SierpinskiAnimatedModel(this);
+		
 				
 	}
 
@@ -51,13 +56,24 @@ public class FractalModel extends Observable{
 	}
 	
 	public void performChaosSteps(IFSChaosGame chaosGame, int numSteps) {
+		
 		setImage(chaosGame.performSteps(getImage(), numSteps));
 	}
- 
+	
+
+	public void performSierpinskiGameAnimation() {
+		smodel.performSierpinskiGameAnimation();
+	
+	}
+	
 	public void clearImage() {
-		Graphics2D    graphics = getImage().createGraphics();
+		
+		smodel.clearImage();
+		
+		Graphics2D graphics = image.createGraphics();
 		graphics.setPaint ( new Color ( 255,255,255 ) );
 		graphics.fillRect ( 0, 0, getImage().getWidth(), getImage().getHeight() );
+		
 		setChanged();
 		notifyObservers();
 	}

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.JFileChooser;
+import javax.swing.Timer;
 
 import online.blickle.fractal.ifs.affine.Blatt;
 import online.blickle.fractal.ifs.affine.Farn;
@@ -14,6 +15,8 @@ import online.blickle.fractal.ifs.affine.Sierpinski;
 public class FractalUIController {
 
 	private FractalModel model;
+	private Timer timer;
+	
 	public FractalUIController() {
 		this.model = new FractalModel();
 	}
@@ -63,6 +66,40 @@ public class FractalUIController {
 		return new LoadImageListener();
 	}
 	
+	public ActionListener getAnimationStartButtonListener() {
+		return new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (timer != null ) {
+					timer.stop();
+				}
+				timer = new Timer(10, new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						model.performSierpinskiGameAnimation();
+						
+					}
+				});
+				timer.start();
+				
+			}
+		};
+	}
+	
+	public ActionListener getAnimationStopButtonListener() {
+		return new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				 if (timer != null ) {
+					 timer.stop();
+				 }
+				
+			}
+		};
+	}
 	public  class ClearImageListener implements ActionListener {
 
 		@Override

@@ -64,12 +64,12 @@ public class CanvasMapper_Test {
 		FCoordinate c = lowerLeft;
 		FPixel p = m.map(c);
 		assertEquals(0,p.getX());
-		assertEquals(100,p.getY());
+		assertEquals(99,p.getY());
 		
 		
 		c = upperRight;
 		p = m.map(c);
-		assertEquals(100,p.getX());
+		assertEquals(99,p.getX());
 		assertEquals(0,p.getY());
 		
 	}

@@ -44,11 +44,12 @@ public class CanvasMapper {
 	public FPixel map(FCoordinate coord) {
 		int px = (int) (((coord.getX()-lowerLeft.getX())*getWithInPixel()) / (upperRight.getX() - lowerLeft.getX()));
 		int py = - (int) (((coord.getY()-upperRight.getY())*getHeightInPixel()) / (upperRight.getY() - lowerLeft.getY()));
-		if (px<0 || py<0 || px>getWithInPixel() || py > getHeightInPixel()) {
-			return new FPixel(0, 0);
-		} else {
-			return new FPixel(px, py);
-		}
+		if (px<0) px=0;
+		if (py<0) py=0;
+		if (px>=getWithInPixel()) px=getWithInPixel()-1;
+		if (py>=getHeightInPixel()) py=getHeightInPixel()-1;
+		return new FPixel(px, py);
+		
 	}
 	
 }

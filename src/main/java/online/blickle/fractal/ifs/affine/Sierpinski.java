@@ -7,7 +7,7 @@ import online.blickle.fractal.ifs.IFSCalculator;
 public class Sierpinski extends IFSCalculator {
 
 	public Sierpinski() {
-		super(new FCoordinate(0, -0.1), new FCoordinate(1, 1));
+		super(new FCoordinate(-0.01, -0.1), new FCoordinate(1.01, 1), new FCoordinate(0, 0));
 		
 		addFunction(new AffineTransformation(0.5, 0, 0, 0.5, 0, 0));
 		addFunction(new AffineTransformation(0.5, 0, 0, 0.5, 0.5, 0));

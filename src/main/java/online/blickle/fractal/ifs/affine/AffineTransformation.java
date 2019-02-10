@@ -3,6 +3,9 @@ package online.blickle.fractal.ifs.affine;
 import online.blickle.fractal.data.FCoordinate;
 import online.blickle.fractal.ifs.IFSElementaryFunction;
 
+/*
+ * Simple affine Transformation A*x + b
+ */
 public class AffineTransformation implements IFSElementaryFunction{
 	
 	private double a11=0;

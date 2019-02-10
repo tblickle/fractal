@@ -57,6 +57,15 @@ public class FractalUI extends JFrame{
 			c.addActionListener(fc.createClearImageListener());
 			this.add(c);
 			
+			JButton s = new JButton("Start Animation");
+			s.addActionListener(fc.getAnimationStartButtonListener());
+			this.add(s);
+			
+			JButton s2 = new JButton("Stop Animation");
+			s2.addActionListener(fc.getAnimationStopButtonListener());
+			this.add(s2);
+			
+			
 		}
 	}
 	

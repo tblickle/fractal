@@ -13,11 +13,13 @@ public class IFSChaosGame  {
 	private IFSCalculator calculator;
 	FCoordinate currPoint;
 	FPixel lastPixel;
+	Color lastColor;
+	
 	Color[] colorMap = {Color.BLACK,Color.RED, Color.GREEN, Color.BLUE};
 
 	public IFSChaosGame(IFSCalculator calculator) {
 		this.calculator = calculator;
-		this.currPoint = new FCoordinate(1, 1);
+		this.currPoint = calculator.getStartPoint();
 		
 	}
 	
@@ -28,7 +30,8 @@ public class IFSChaosGame  {
 		for (int i = 0; i<steps; i++) {
         	currPoint = calculator.iterate(currPoint);
     		lastPixel = mapper.map(currPoint);
-    		graphics.setPaint ( colorMap[calculator.getLastFunctionIdx()]);
+    		lastColor = colorMap[calculator.getLastFunctionIdx()];
+    		graphics.setPaint (lastColor );
     		graphics.fillOval(lastPixel.getX(), lastPixel.getY(), 3, 3);
     	}
 		return image;
@@ -43,4 +46,11 @@ public class IFSChaosGame  {
 		return this.lastPixel;
 	}
 	
+	public Color getColor() {
+		return lastColor;
+	}
+	
+	public IFSCalculator getCalculator() {
+		return calculator;
+	}
 }
