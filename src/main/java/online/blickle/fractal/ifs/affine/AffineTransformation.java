@@ -28,6 +28,9 @@ public class AffineTransformation implements IFSElementaryFunction{
 
 	@Override
 	public FCoordinate map(FCoordinate in) {
+		if (in == null) {
+			return null;
+		}
 		double x = in.getX();
 		double y = in.getY();
 		
