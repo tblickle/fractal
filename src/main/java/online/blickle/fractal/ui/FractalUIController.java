@@ -11,6 +11,7 @@ import online.blickle.fractal.ifs.affine.Blatt;
 import online.blickle.fractal.ifs.affine.Farn;
 import online.blickle.fractal.ifs.affine.Koch;
 import online.blickle.fractal.ifs.affine.Sierpinski;
+import online.blickle.fractal.ifs.complex.Julia;
 
 public class FractalUIController {
 
@@ -42,6 +43,10 @@ public class FractalUIController {
 		return new ChaosGameListener(model, new Farn());
 	}
 	
+	public ChaosGameListener createJuliaChaosGameListener() {
+		return new ChaosGameListener(model, new Julia());
+	}
+	
 	public CopyMachineListner createSierpinskiCopyMachineListener() {
 		return new CopyMachineListner(model, new Sierpinski());
 	}
@@ -56,6 +61,10 @@ public class FractalUIController {
 	
 	public CopyMachineListner createKochCopyMachineListener() {
 		return new CopyMachineListner(model, new Koch());
+	}
+	
+	public CopyMachineListner createJuliaCopyMachineListener() {
+		return new CopyMachineListner(model, new Julia());
 	}
 	
 	public ClearImageListener createClearImageListener() {

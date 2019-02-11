@@ -90,6 +90,9 @@ public class FractalUI extends JFrame{
 			k.addActionListener(fc.createKochCopyMachineListener());
 			add(k);
 			
+			JButton j = new JButton("Julia");
+			j.addActionListener(fc.createJuliaCopyMachineListener());
+			add(j);
 		}
 	}
 	
@@ -113,6 +116,11 @@ public class FractalUI extends JFrame{
 			JButton k = new JButton("Koch");
 			k.addActionListener(fc.createKochChaosGameListener());
 			add(k);
+			
+
+			JButton j = new JButton("Julia");
+			j.addActionListener(fc.createJuliaChaosGameListener());
+			add(j);
 			
 		}
 	}
