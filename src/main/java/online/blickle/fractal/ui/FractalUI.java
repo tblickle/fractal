@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import online.blickle.fractal.ui.FractalUIController.MyMouseDraggedListener;
+
 public class FractalUI extends JFrame{
 
 	
@@ -64,6 +66,10 @@ public class FractalUI extends JFrame{
 			JButton s2 = new JButton("Stop Animation");
 			s2.addActionListener(fc.getAnimationStopButtonListener());
 			this.add(s2);
+			
+			JButton m = new JButton("Mandelbrot");
+			m.addActionListener(fc.getMandelbrotListener());
+			this.add(m);
 			
 			
 		}
@@ -134,6 +140,9 @@ public class FractalUI extends JFrame{
 			this.fm=fc.getModel();
 			fm.addObserver(this);
 			setPreferredSize(new Dimension(fm.getImage().getWidth(),fm.getImage().getHeight()));
+			MyMouseDraggedListener listener = fc.getMouseDragListener();
+		    addMouseListener(listener);
+		    addMouseMotionListener(listener);
 		}
 		@Override
 		public void paintComponent(Graphics g)  {

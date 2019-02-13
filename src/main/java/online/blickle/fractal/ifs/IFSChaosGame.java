@@ -13,14 +13,25 @@ public class IFSChaosGame  {
 	private IFSCalculator calculator;
 	FCoordinate currPoint;
 	FPixel lastPixel;
+	int pixelSize;
 	Color lastColor;
 	
 	Color[] colorMap = {Color.BLACK,Color.RED, Color.GREEN, Color.BLUE};
 
 	public IFSChaosGame(IFSCalculator calculator) {
+		this(calculator,2);
+	}
+
+	public IFSChaosGame(IFSCalculator calculator, int pixelsize) {
 		this.calculator = calculator;
 		this.currPoint = calculator.getStartPoint();
-		
+		setPixelSize(pixelsize);
+	}
+	
+	public void setPixelSize(int pixelsize) {
+		if (pixelsize <2) pixelsize = 2; // Minimum size is 2, otherwise nothing is drawn
+		if (pixelsize >10) pixelsize =10;
+		this.pixelSize = pixelsize;
 	}
 	
 	public BufferedImage performSteps(BufferedImage image,  int steps) {
@@ -32,7 +43,7 @@ public class IFSChaosGame  {
     		lastPixel = mapper.map(currPoint);
     		lastColor = colorMap[calculator.getLastFunctionIdx()];
     		graphics.setPaint (lastColor );
-    		graphics.fillOval(lastPixel.getX(), lastPixel.getY(), 3, 3);
+    		graphics.fillOval(lastPixel.getX()+pixelSize/2, lastPixel.getY()+pixelSize/2, pixelSize, pixelSize);
     	}
 		return image;
                

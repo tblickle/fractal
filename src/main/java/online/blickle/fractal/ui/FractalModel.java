@@ -1,7 +1,6 @@
 package online.blickle.fractal.ui;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
@@ -11,21 +10,23 @@ import java.util.Observable;
 
 import javax.imageio.ImageIO;
 
-import online.blickle.fractal.data.FPixel;
+import online.blickle.fractal.data.FCoordinate;
 import online.blickle.fractal.ifs.IFSChaosGame;
 import online.blickle.fractal.ifs.IFSCopyMachine;
+import online.blickle.fractal.mandelbrot.FractalImage;
+import online.blickle.fractal.mandelbrot.Mandelbrot;
 
 public class FractalModel extends Observable{
 
 	private static int PREF_SIZE = 800;
 	private BufferedImage image;
 	private SierpinskiAnimatedModel smodel;
+	private MandelbrotModel mmodel;
 	
 	public FractalModel() {
 		image = new BufferedImage(PREF_SIZE, PREF_SIZE, BufferedImage.TYPE_INT_RGB );
 		smodel = new SierpinskiAnimatedModel(this);
-		
-				
+		mmodel = new MandelbrotModel(this);
 	}
 
 	public BufferedImage getImage() {
@@ -44,8 +45,6 @@ public class FractalModel extends Observable{
                 AffineTransformOp.TYPE_BILINEAR);
             img = op.filter(img, null);
             setImage(img);
-            
-           
         } catch (Exception e){
         	
         }
@@ -56,14 +55,15 @@ public class FractalModel extends Observable{
 	}
 	
 	public void performChaosSteps(IFSChaosGame chaosGame, int numSteps) {
-		
 		setImage(chaosGame.performSteps(getImage(), numSteps));
 	}
-	
 
 	public void performSierpinskiGameAnimation() {
 		smodel.performSierpinskiGameAnimation();
+	}
 	
+	public void doMandelbrot(int startX, int startY, int endX, int endY) {
+		mmodel.compute(startX, startY, endX, endY);
 	}
 	
 	public void clearImage() {
