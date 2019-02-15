@@ -17,8 +17,7 @@ public class MandelbrotModel {
 	 
 	public MandelbrotModel(FractalModel model) {
 		this.model=model;
-		this.lowerLeft = new FCoordinate(-1.5, -1);
-		this.upperRight = new FCoordinate(0.5, 1);
+		reset();
 	}
 	
 
@@ -26,11 +25,16 @@ public class MandelbrotModel {
 		int width = model.getImage().getWidth();
 		int height = model.getImage().getHeight();
 		CanvasMapper mapper = new CanvasMapper(width, height, lowerLeft, upperRight);
-		this.lowerLeft = mapper.map(new FPixel(startX, startY));
-		this.upperRight = mapper.map(new FPixel(endX,endY));
+		this.lowerLeft = mapper.map(new FPixel(Math.min(startX,endX), Math.max(startY,endY)));
+		this.upperRight = mapper.map(new FPixel(Math.max(startX,endX), Math.min(startY,endY)));
 		
 		FractalImage mb = new FractalImage(width,height, BufferedImage.TYPE_INT_RGB);
 		mb.generate(new Mandelbrot(), lowerLeft,upperRight);
 		model.setImage(mb);
+	}
+	
+	public void reset() {
+		this.lowerLeft = new FCoordinate(-1.5, -1);
+		this.upperRight = new FCoordinate(0.5, 1);
 	}
 }
