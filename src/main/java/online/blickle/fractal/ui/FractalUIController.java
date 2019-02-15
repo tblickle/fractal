@@ -125,6 +125,21 @@ public class FractalUIController {
 			}
 		};
 	}
+	
+	public ActionListener getAnimationStepButtonListener() {
+		return new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				 if (timer != null ) {
+					 timer.stop();
+				 }
+				model.performSierpinskiGameAnimation();
+			}
+		};
+	}
+	
+	
 	public  class ClearImageListener implements ActionListener {
 
 		@Override

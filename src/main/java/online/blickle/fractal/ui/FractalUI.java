@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import online.blickle.fractal.ui.FractalUIController.ClearImageListener;
 import online.blickle.fractal.ui.FractalUIController.MyMouseDraggedListener;
 
 public class FractalUI extends JFrame{
@@ -43,11 +44,30 @@ public class FractalUI extends JFrame{
 		public BasePanel(FractalUIController fc) {
 			this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 			this.add(new CmdPanel(fc));
+			this.add(new SpecialPanel(fc));
 			this.add(new CopyPanel(fc));
 			this.add(new ChaosPanel(fc));
 		}
 	}
 	
+	static class SpecialPanel  extends JPanel {
+		public SpecialPanel(FractalUIController fc)		{
+			
+			add(new JLabel("Sierpinski Animation:"));
+			
+			JButton s = new JButton("Start Animation");
+			s.addActionListener(fc.getAnimationStartButtonListener());
+			this.add(s);
+			
+			JButton s2 = new JButton("Stop Animation");
+			s2.addActionListener(fc.getAnimationStopButtonListener());
+			this.add(s2);
+			
+			JButton s3 = new JButton("Step");
+			s3.addActionListener(fc.getAnimationStepButtonListener());
+			this.add(s3);
+		}
+	}
 	
 	static class CmdPanel extends JPanel {
 		public CmdPanel(FractalUIController fc) {
@@ -58,14 +78,6 @@ public class FractalUI extends JFrame{
 			JButton c = new JButton("Clear");
 			c.addActionListener(fc.createClearImageListener());
 			this.add(c);
-			
-			JButton s = new JButton("Start Animation");
-			s.addActionListener(fc.getAnimationStartButtonListener());
-			this.add(s);
-			
-			JButton s2 = new JButton("Stop Animation");
-			s2.addActionListener(fc.getAnimationStopButtonListener());
-			this.add(s2);
 			
 			JButton m = new JButton("Mandelbrot");
 			m.addActionListener(fc.getMandelbrotListener());
@@ -143,6 +155,7 @@ public class FractalUI extends JFrame{
 			MyMouseDraggedListener listener = fc.getMouseDragListener();
 		    addMouseListener(listener);
 		    addMouseMotionListener(listener);
+		    fm.clearImage();
 		}
 		@Override
 		public void paintComponent(Graphics g)  {

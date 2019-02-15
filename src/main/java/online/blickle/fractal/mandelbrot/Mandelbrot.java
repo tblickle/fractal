@@ -10,7 +10,7 @@ public class Mandelbrot implements FractalFunction{
 
 	@Override
 	public int compute(FCoordinate coordinate) {
-		int iter = 300;
+		int iter = 1000;
 		double zx = 0;
 		double zy = 0;
 		double cX = coordinate.getX();

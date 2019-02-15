@@ -41,7 +41,7 @@ public class IFSChaosGame  {
 		for (int i = 0; i<steps; i++) {
         	currPoint = calculator.iterate(currPoint);
     		lastPixel = mapper.map(currPoint);
-    		lastColor = colorMap[calculator.getLastFunctionIdx()];
+    		lastColor = colorMap[calculator.getLastFunctionIdx()%colorMap.length];
     		graphics.setPaint (lastColor );
     		graphics.fillOval(lastPixel.getX()+pixelSize/2, lastPixel.getY()+pixelSize/2, pixelSize, pixelSize);
     	}

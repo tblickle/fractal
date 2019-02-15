@@ -18,7 +18,7 @@ public class MandelbrotModel {
 	public MandelbrotModel(FractalModel model) {
 		this.model=model;
 		this.lowerLeft = new FCoordinate(-1.5, -1);
-		this.upperRight = new FCoordinate(1, 1);
+		this.upperRight = new FCoordinate(0.5, 1);
 	}
 	
 

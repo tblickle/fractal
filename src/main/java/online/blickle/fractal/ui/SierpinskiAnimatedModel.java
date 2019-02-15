@@ -66,10 +66,5 @@ public class SierpinskiAnimatedModel {
 			graphics.setPaint ( colorMap[i] );
 			graphics.fillOval(corners[i].getX()-5, corners[i].getY()-5, 10, 10);
 		}
-		paintCorners();
-	}
-	
-	private void paintCorners() {
-		
 	}
 }
