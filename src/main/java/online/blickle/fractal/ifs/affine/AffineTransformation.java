@@ -41,6 +41,11 @@ public class AffineTransformation implements IFSElementaryFunction{
 
 	}
 	
+	@Override
+	public double getDeterminante() {
+		return Math.abs(a11*a22-a12*a21);
+	}
+	
 	
 
 }

@@ -37,5 +37,10 @@ public class ComplexTransformation implements IFSElementaryFunction{
 	private FCoordinate toCoordinate(Complex c) {
 		return new FCoordinate(c.getReal(), c.getImaginary());
 	}
+
+	@Override
+	public double getDeterminante() {
+		return 1.0/exp;
+	}
 	
 }

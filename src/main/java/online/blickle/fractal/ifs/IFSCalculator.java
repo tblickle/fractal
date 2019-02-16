@@ -2,6 +2,7 @@ package online.blickle.fractal.ifs;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import online.blickle.fractal.data.CanvasMapper;
 import online.blickle.fractal.data.FCoordinate;
@@ -14,6 +15,8 @@ import online.blickle.fractal.data.FCoordinate;
 public class IFSCalculator {
 	
 	private List<IFSElementaryFunction> IFSList = new ArrayList<>();
+	private List<Double>IFSProbability = new ArrayList<>();
+	
 	private FCoordinate lowerLeft;
 	private FCoordinate upperRight;
 	private FCoordinate startPoint;
@@ -31,10 +34,20 @@ public class IFSCalculator {
 	
 	public void addFunction(IFSElementaryFunction function) {
 		IFSList.add(function);
+		computeProbabilities();
 	}
 	
 	public FCoordinate iterate(FCoordinate in) {
-		lastFunction = (int)(Math.random()*IFSList.size());
+		double rnd = Math.random();
+		double probSum=0;
+		lastFunction = IFSProbability.size()-1;
+		for (int i=0; i< IFSProbability.size();i++) {
+			probSum += IFSProbability.get(i);
+			if (rnd < probSum) {
+				lastFunction = i;
+				break;
+			}
+		}
 		return IFSList.get(lastFunction).map(in);
 	}
 	
@@ -66,5 +79,18 @@ public class IFSCalculator {
 		return startPoint;
 	}
 	
+	private void computeProbabilities() {
+		double sum=0;
+		List<Double>probs = new ArrayList<>();
+		for (IFSElementaryFunction f : IFSList) {
+			sum+= f.getDeterminante()+0.1;
+			probs.add(f.getDeterminante()+0.1);
+		}
+		//Normalize
+		IFSProbability.clear();
+		for (Double p: probs) {
+			IFSProbability.add(p/sum);
+		}
+	}
 
 }

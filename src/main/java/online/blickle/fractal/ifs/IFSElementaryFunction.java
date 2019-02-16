@@ -10,5 +10,7 @@ import online.blickle.fractal.data.FCoordinate;
 public interface IFSElementaryFunction {
 	
 	public FCoordinate map(FCoordinate ins);
+	
+	public double getDeterminante();
 
 }
