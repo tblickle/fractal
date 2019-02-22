@@ -33,7 +33,7 @@ public class SierpinskiAnimatedModel {
 				cm.map(new FCoordinate(1, 0)),
 				cm.map(new FCoordinate(0.5, 1))
 			};
-		this.chaosGame = new IFSChaosGame(calculator);
+		this.chaosGame = new IFSChaosGame(calculator,4);
 		this.orignalImage = new BufferedImage(width,height, model.getImage().getType());
 	}
 	

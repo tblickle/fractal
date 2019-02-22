@@ -11,11 +11,11 @@ import online.blickle.fractal.mandelbrot.Mandelbrot;
 public class MandelbrotModel {
 
 
-	private FractalModel model;
+	private ImageModel model;
 	private FCoordinate lowerLeft;
 	private FCoordinate upperRight;
 	 
-	public MandelbrotModel(FractalModel model) {
+	public MandelbrotModel(ImageModel model) {
 		this.model=model;
 		reset();
 	}

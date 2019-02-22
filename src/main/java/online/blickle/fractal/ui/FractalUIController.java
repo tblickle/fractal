@@ -77,19 +77,7 @@ public class FractalUIController {
 		return new LoadImageListener();
 	}
 	
-	public MyMouseDraggedListener getMouseDragListener() {
-		return new MyMouseDraggedListener ();
-	}
 	
-	public ActionListener getMandelbrotListener() {
-		return new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				model.doMandelbrot(0,0,getModel().getImage().getWidth(),getModel().getImage().getHeight());
-			}
-		};
-	}
 	
 	public ActionListener getAnimationStartButtonListener() {
 		return new ActionListener() {
@@ -166,25 +154,4 @@ public class FractalUIController {
 		
 	}
 	
-	public class MyMouseDraggedListener extends MouseInputAdapter {
-		int startX,startY,endX,endY;
-	      @Override
-	      public void mousePressed(MouseEvent evt) {
-	         startX = evt.getX();
-	         startY = evt.getY();
-	         
-	      }
-	      @Override
-	      public void mouseDragged(MouseEvent evt) {
-	         endX = evt.getX();
-	         endY = evt.getY();
-	         
-	      }
-	      @Override
-	         public void mouseReleased(MouseEvent evt) {
-	         endX = evt.getX();
-	         endY = evt.getY();
-	         getModel().doMandelbrot(startX,startY,endX,endY);
-	      }
-	   }
 }

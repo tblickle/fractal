@@ -15,9 +15,7 @@ public class CanvasMapper {
 		this.lowerLeft = lowerLeft;
 		this.upperRight = upperRight;
 	}
-	
-	
-	
+		
 	public int getWithInPixel() {
 		return withInPixel;
 	}
@@ -33,7 +31,6 @@ public class CanvasMapper {
 	public FCoordinate getUpperRight() {
 		return upperRight;
 	}
-
 
 	public FCoordinate map(FPixel point) {
 		double cX = lowerLeft.getX() + point.getX()* (upperRight.getX()-lowerLeft.getX()) / getWithInPixel(); 

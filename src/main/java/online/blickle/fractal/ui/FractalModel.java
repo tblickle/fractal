@@ -16,9 +16,9 @@ import online.blickle.fractal.ifs.IFSCopyMachine;
 import online.blickle.fractal.mandelbrot.FractalImage;
 import online.blickle.fractal.mandelbrot.Mandelbrot;
 
-public class FractalModel extends Observable{
+public class FractalModel  extends Observable implements ImageModel {
 
-	private static int PREF_SIZE = 800;
+	private static int PREF_SIZE = 900;
 	private BufferedImage image;
 	private SierpinskiAnimatedModel smodel;
 	private MandelbrotModel mmodel;
@@ -46,7 +46,7 @@ public class FractalModel extends Observable{
             img = op.filter(img, null);
             setImage(img);
         } catch (Exception e){
-        	
+        	e.printStackTrace();
         }
 	}
 	
@@ -78,7 +78,8 @@ public class FractalModel extends Observable{
 		notifyObservers();
 	}
 
-	protected void setImage(BufferedImage image) {
+	
+	public void setImage(BufferedImage image) {
 		this.image = image;
 		setChanged();
 		notifyObservers();

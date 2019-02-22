@@ -9,23 +9,27 @@ import java.util.Observer;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.border.TitledBorder;
 
-import online.blickle.fractal.ui.FractalUIController.ClearImageListener;
-import online.blickle.fractal.ui.FractalUIController.MyMouseDraggedListener;
+import online.blickle.fractal.ui.MandelbrotController.MandelbrotMouseDraggedListener;
+
 
 public class FractalUI extends JFrame{
 
 	
 	public FractalUI() {
 		FractalUIController fc = new FractalUIController();
-		FractalPanel fp = new FractalPanel(fc);
+		MandelbrotPanel mpanel = new MandelbrotPanel(fc.getModel());
+		FractalPanel fp = new FractalPanel(fc,mpanel.getController());
 		setTitle("Fractal App");
 		JPanel basePanel = new JPanel(new BorderLayout());
-		basePanel.add(new BasePanel(fc),BorderLayout.NORTH);
-		basePanel.add(fp,BorderLayout.SOUTH);
+		JPanel innerPanel = new BasePanel(fc);
+		innerPanel.add(mpanel);
+		basePanel.add(innerPanel,BorderLayout.EAST);
+		basePanel.add(fp,BorderLayout.WEST);
+		
 		add(basePanel);
 		pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,13 +51,14 @@ public class FractalUI extends JFrame{
 			this.add(new SpecialPanel(fc));
 			this.add(new CopyPanel(fc));
 			this.add(new ChaosPanel(fc));
+			
 		}
 	}
 	
 	static class SpecialPanel  extends JPanel {
 		public SpecialPanel(FractalUIController fc)		{
 			
-			add(new JLabel("Sierpinski Animation:"));
+			this.setBorder(new TitledBorder("Sierpinski Animation"));
 			
 			JButton s = new JButton("Start Animation");
 			s.addActionListener(fc.getAnimationStartButtonListener());
@@ -71,6 +76,9 @@ public class FractalUI extends JFrame{
 	
 	static class CmdPanel extends JPanel {
 		public CmdPanel(FractalUIController fc) {
+			
+			this.setBorder(new TitledBorder("Commands"));
+			
 			JButton l = new JButton("Load");
 			l.addActionListener(fc.createLoadImageListener());
 			this.add(l);
@@ -79,18 +87,14 @@ public class FractalUI extends JFrame{
 			c.addActionListener(fc.createClearImageListener());
 			this.add(c);
 			
-			JButton m = new JButton("Mandelbrot");
-			m.addActionListener(fc.getMandelbrotListener());
-			this.add(m);
-			
 			
 		}
 	}
 	
-	static class CopyPanel extends JPanel {
+		static class CopyPanel extends JPanel {
 		public CopyPanel(FractalUIController fc) {
-			
-			add(new JLabel("Fractal Copy Machine:"));
+		
+			this.setBorder(new TitledBorder("Fractal Copy Machine"));
 			
 			JButton s = new JButton("Sierpinski");
 			s.addActionListener(fc.createSierpinskiCopyMachineListener());
@@ -111,13 +115,14 @@ public class FractalUI extends JFrame{
 			JButton j = new JButton("Julia");
 			j.addActionListener(fc.createJuliaCopyMachineListener());
 			add(j);
+			
 		}
 	}
 	
 	static class ChaosPanel extends JPanel {
 		public ChaosPanel(FractalUIController fc) {
+			this.setBorder(new TitledBorder("Chaos Game"));
 			
-			add(new JLabel("Fractal Chaos Game:"));
 			
 			JButton s = new JButton("Sierpinski");
 			s.addActionListener(fc.createSierpinskiChaosGameListener());
@@ -135,7 +140,6 @@ public class FractalUI extends JFrame{
 			k.addActionListener(fc.createKochChaosGameListener());
 			add(k);
 			
-
 			JButton j = new JButton("Julia");
 			j.addActionListener(fc.createJuliaChaosGameListener());
 			add(j);
@@ -148,11 +152,11 @@ public class FractalUI extends JFrame{
 	static class FractalPanel extends JPanel implements Observer{
 		
 		private FractalModel fm;
-		public FractalPanel(FractalUIController fc) {
+		public FractalPanel(FractalUIController fc, MandelbrotController mc) {
 			this.fm=fc.getModel();
 			fm.addObserver(this);
 			setPreferredSize(new Dimension(fm.getImage().getWidth(),fm.getImage().getHeight()));
-			MyMouseDraggedListener listener = fc.getMouseDragListener();
+			MandelbrotMouseDraggedListener listener = mc.getMouseDragListener();
 		    addMouseListener(listener);
 		    addMouseMotionListener(listener);
 		    fm.clearImage();
