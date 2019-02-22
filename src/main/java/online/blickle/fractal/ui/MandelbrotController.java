@@ -24,21 +24,12 @@ public class MandelbrotController {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				model.reset();
 				model.compute(0,0,initalWidth,initialHeight);
 			}
 		};
 	}
 	
-	public ActionListener getMandelbrotResetListener() {
-		return new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				model.compute(0,0,initalWidth,initialHeight);
-				
-			}
-		};
-	}
 	
 	public MandelbrotMouseDraggedListener getMouseDragListener() {
 		return new MandelbrotMouseDraggedListener ();

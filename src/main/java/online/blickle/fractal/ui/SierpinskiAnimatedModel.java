@@ -13,7 +13,7 @@ import online.blickle.fractal.ifs.affine.Sierpinski;
 
 public class SierpinskiAnimatedModel {
 
-	private FractalModel model;
+	private ImageModel iModel;
 	private IFSChaosGame chaosGame;
 	private BufferedImage orignalImage;
 	private int width;
@@ -21,10 +21,10 @@ public class SierpinskiAnimatedModel {
 	private FPixel[] corners;
 	private Color[] colorMap = {Color.BLACK,Color.RED, Color.GREEN};
 	
-	public SierpinskiAnimatedModel(FractalModel model) {
-		this.model=model;
-		this.width = model.getImage().getWidth();
-		this.height = model.getImage().getHeight();
+	public SierpinskiAnimatedModel(ImageModel iModel) {
+		this.iModel=iModel;
+		this.width = iModel.getImage().getWidth();
+		this.height = iModel.getImage().getHeight();
 		
 		IFSCalculator calculator = new Sierpinski();
 		CanvasMapper cm = calculator.getCanvasMapper(height, height);
@@ -34,11 +34,13 @@ public class SierpinskiAnimatedModel {
 				cm.map(new FCoordinate(0.5, 1))
 			};
 		this.chaosGame = new IFSChaosGame(calculator,4);
-		this.orignalImage = new BufferedImage(width,height, model.getImage().getType());
+		this.orignalImage = new BufferedImage(width,height, iModel.getImage().getType());
+		clearImage();
 	}
 	
 	public void performSierpinskiGameAnimation() {
 		FPixel prevPixel= chaosGame.getPixel();
+		
 		orignalImage = chaosGame.performSteps(orignalImage, 1);
 		
 		BufferedImage image = new BufferedImage(width, height, orignalImage.getType());
@@ -54,7 +56,7 @@ public class SierpinskiAnimatedModel {
 			currGraphics.drawLine(prevPixel.getX(), prevPixel.getY(), corner.getX(), corner.getY());
 		}
 		currGraphics.fillOval(lastPixel.getX()-5,lastPixel.getY()-5,10,10);
-		model.setImage(image);
+		iModel.setImage(image);
 		
 	}
 	
