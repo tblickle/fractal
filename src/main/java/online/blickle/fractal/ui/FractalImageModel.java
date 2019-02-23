@@ -10,13 +10,13 @@ import java.util.Observable;
 
 import javax.imageio.ImageIO;
 
-public class FractalModel  extends Observable implements ImageModel {
+public class FractalImageModel  extends Observable implements ImageModel {
 
 	private static int PREF_SIZE = 900;
 	private BufferedImage image;
 	
-	public FractalModel() {
-		image = new BufferedImage(PREF_SIZE, PREF_SIZE, BufferedImage.TYPE_INT_RGB );
+	public FractalImageModel() {
+		clearImage();
 	}
 
 	public BufferedImage getImage() {
@@ -42,6 +42,7 @@ public class FractalModel  extends Observable implements ImageModel {
 	
 	public void clearImage() {
 		
+		image = new BufferedImage(PREF_SIZE, PREF_SIZE, BufferedImage.TYPE_INT_RGB );
 		Graphics2D graphics = image.createGraphics();
 		graphics.setPaint ( new Color ( 255,255,255 ) );
 		graphics.fillRect ( 0, 0, getImage().getWidth(), getImage().getHeight() );
